@@ -1,5 +1,5 @@
 import {Router} from "express";
-import { foodService } from '../services';
+import { foodService } from '../services/index.js';
 
 const foodRouter = Router();
 

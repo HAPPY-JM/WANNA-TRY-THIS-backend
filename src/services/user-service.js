@@ -1,4 +1,4 @@
-import { userModel } from '../db';
+import { userModel } from '../db/index.js';
 
 //유저라우터에서 사용
 class UserService {
