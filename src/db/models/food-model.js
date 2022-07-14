@@ -1,5 +1,6 @@
-import { model } from 'mongoose';
-import { FoodSchema } from '../schemas/food-schema';
+import pkg from 'mongoose';
+const { model } = pkg;
+import { FoodSchema } from '../schemas/food-schema.js';
 
 const Food = model("food", FoodSchema);
 

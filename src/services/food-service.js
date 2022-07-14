@@ -1,4 +1,4 @@
-import { foodModel } from '../db';
+import { foodModel } from '../db/index.js';
 
 class FoodService {
     // 본 파일의 맨 아래에서, new FoodService(foodModel) 하면, 이 함수의 인자로 전달됨

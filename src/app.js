@@ -1,7 +1,7 @@
 import cors from "cors";
 import express from "express";
-import { userRouter, foodRouter } from './routers';
-import { errorHandler } from './middlewares';
+import { foodRouter } from './routers/index.js';
+import { errorHandler } from './middlewares/index.js';
 
 const app = express();
 // CORS 에러 방지
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
-app.use("/api/user", userRouter);
+// app.use("/api/user", userRouter);
 app.use("/api/food", foodRouter);
 
 
