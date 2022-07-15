@@ -1,6 +1,6 @@
-{ 
+{
   "type": "module",
-    "scripts": {
+  "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon index.js babel-node"
   },
@@ -9,7 +9,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
-    "mongoose": "^6.4.4"
+    "express-session": "^1.17.3",
+    "mongoose": "^6.4.4",
+    "passport": "^0.6.0",
+    "passport-kakao": "^1.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.6",

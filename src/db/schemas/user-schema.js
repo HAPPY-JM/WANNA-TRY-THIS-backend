@@ -23,9 +23,15 @@ const UserSchema = new Schema(
                 },
             ],
         },
+        // { kakao, google, naver }
+        provider: {
+            type: String,
+            required: true
+        }
     },
     {
         collection: "users",
+        timestamps: true,
     }
 );
 
