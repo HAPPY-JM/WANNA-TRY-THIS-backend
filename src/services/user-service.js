@@ -7,13 +7,13 @@ class UserService {
         this.userModel = userModel;
     }
 
-    // async addUser(userInfo){
-    //     const {nickname, email, foodData} = userInfo;
+    async addUser(userInfo){
+        const newUser =  await this.userModel.create(userInfo);
+        return newUser;
 
-
-    // }
+    }
 }    
 
 const userService = new UserService(userModel);
 
-export {userService}
+export { userService }
