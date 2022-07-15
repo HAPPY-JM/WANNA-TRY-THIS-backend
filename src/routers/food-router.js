@@ -13,7 +13,7 @@ foodRouter.post("/", async(req, res) => {
 foodRouter.get("/", async (req, res) => {
     const getFoods = await foodService.findAll();
 
-    res.status(201).json(getFoods);
+    res.status(200).json(getFoods);
 });
 
 // foodRouter.get("/", async (req, res) => {
