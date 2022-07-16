@@ -8,13 +8,14 @@ const config = {
    callbackURL: '/api/auth/kakao/callback', // 카카오 로그인 Redirect URI 경로
 }
 
-//#region fucn:findOrCreateUser
+//#region func:findOrCreateUser
 const provider = "KAKAO";
 
 async function findOrCreateUser(email, nickname) {
    const user = await userModel.findOne({ email });
  
    if (user) {
+
      return user;
    }
  
@@ -27,12 +28,14 @@ async function findOrCreateUser(email, nickname) {
  
    return createdUser;
  }
- //#endregion
+//#endregion
 
  export const kakao = new KakaoStrategy(
    config,
 
    async (accessToken, refreshToken, profile, done) => {
+     console.log('kakao profile', profile);
+
      const nickname = profile._json.properties.nickname;
      const email = profile._json.kakao_account.email;
 

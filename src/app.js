@@ -4,7 +4,7 @@ import passport from 'passport';
 import { usePassport } from './passport/index.js';
 import { errorHandler } from './middlewares/index.js';
 import { foodRouter, userRouter, authRouter } from './routers/index.js';
-// import session from 'express-session';
+import session from 'express-session';
 
 usePassport();
 
@@ -19,6 +19,14 @@ app.use(express.json());
 // Content-Type: application/x-www-form-urlencoded 형태의 데이터를 인식하고 핸들링할 수 있게 함.
 app.use(express.urlencoded({ extended: false }));
 
+app.use(
+    session({
+      secret: 'SECRET',
+      resave: false,
+      saveUninitialized: false,
+    })
+);
+  
 app.use(passport.initialize());
 app.use(passport.session());
 
