@@ -5,10 +5,9 @@ const userRouter = Router();
 
 userRouter.post("/", async(req, res) => {
     const userInfo = req.body;
-    const addNewUser = await userService.addUser(userInfo);
+    const newUser = await userService.addUser(userInfo);
 
-    res.status(201).json(addNewUser);
+    res.status(201).json(newUser);
 });
-
 
 export { userRouter };

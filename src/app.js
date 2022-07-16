@@ -1,9 +1,9 @@
 import cors from "cors";
 import express from "express";
-import { foodRouter, userRouter, authRouter } from './routers/index.js';
-import { errorHandler } from './middlewares/index.js';
 import passport from 'passport';
 import { usePassport } from './passport/index.js';
+import { errorHandler } from './middlewares/index.js';
+import { foodRouter, userRouter, authRouter } from './routers/index.js';
 // import session from 'express-session';
 
 usePassport();
@@ -22,7 +22,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use("/api/user", userRouter);
 app.use("/api/food", foodRouter);
 app.use("/api/user", userRouter);
 app.use("/api/auth", authRouter);
