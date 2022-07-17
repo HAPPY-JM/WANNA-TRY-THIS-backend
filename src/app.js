@@ -4,7 +4,7 @@ import passport from 'passport';
 import { usePassport } from './passport/index.js';
 import { errorHandler } from './middlewares/index.js';
 import { foodRouter, userRouter, authRouter } from './routers/index.js';
-// import session from 'express-session';
+import session from 'express-session';
 
 usePassport();
 
@@ -12,6 +12,8 @@ const app = express();
 
 // CORS 에러 방지
 app.use(cors());
+
+app.use(session({secret:'somevalue'}));
 
 // Content-Type: application/json 형태의 데이터를 인식하고 핸들링할 수 있게 함.
 app.use(express.json());
