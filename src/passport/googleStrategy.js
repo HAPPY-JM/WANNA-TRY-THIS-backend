@@ -1,23 +1,21 @@
 import 'dotenv/config';
-import passport from 'passport';
-import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
+import {Strategy} from 'passport-google-oauth20';
 import { userModel } from '../db/index.js';
 
 
 export const google = 
-    new GoogleStrategy(
+    new Strategy(
         {
             clientID: process.env.GOOGLE_ID,
             clientSecret: process.env.GOOGLE_SECRET,
             callbackURL: '/api/auth/google/callback',
         },
-        async (accessToken, refreshToken, profile, email, done) => {
-            const nickname = profile.displayName;
+        async (accessToken, refreshToken, profile, done) => {
+            console.log(profile);
 
-            // console.log(accessToken);
-            // console.log(refreshToken);
-            // console.log(profile);
-            // console.log(nickname, email);
+            const nickname = profile.displayName;
+            const email = profile.emails[0].value;
+            const provider = profile.provider;
 
             try{
                 const user = await userModel.findOne({ email });
@@ -29,7 +27,7 @@ export const google =
                 const createdUser = await userModel.create({
                     nickname,
                     email,
-                    provider: 'google',
+                    provider,
                 });
 
                 done(null, createdUser);
