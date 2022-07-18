@@ -6,7 +6,6 @@ const Food = model("food", FoodSchema);
 
 export class FoodModel{
     async create(foodInfo){
-        //음식데이터 추가
         const createNewFood = await Food.create(foodInfo);
         return createNewFood;
     }

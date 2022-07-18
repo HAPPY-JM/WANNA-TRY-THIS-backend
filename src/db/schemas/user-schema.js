@@ -10,6 +10,7 @@ const UserSchema = new Schema(
 
         email: {
             type: String,
+            unique: true,
             // ref: (받아온 정보의 이메일)
         },
 
