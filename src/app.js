@@ -1,13 +1,13 @@
 import cors from "cors";
 import express from "express";
 import passport from 'passport';
-import { usePassport, google } from './passport/index.js';
+import { useKakaoPassport,useGooglePassport } from './passport/index.js';
 import { errorHandler } from './middlewares/index.js';
 import { foodRouter, userRouter, authRouter } from './routers/index.js';
 import session from 'express-session';
 
-usePassport();
-passport.use(google);
+useKakaoPassport();
+useGooglePassport(); 
 
 const app = express();
 
