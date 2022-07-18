@@ -1,9 +1,12 @@
 import passport from 'passport';
 
 import { kakao } from './kakaoStrategy.js';
+import { google } from './googleStrategy.js';
 
-export function usePassport() {
+export function useKakaoPassport() {
   passport.use(kakao);
 }
 
-export * from './googleStrategy.js';
+export function useGooglePassport(){
+  passport.use(google);
+}
