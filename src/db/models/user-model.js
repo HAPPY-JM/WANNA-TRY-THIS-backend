@@ -17,7 +17,7 @@ export class UserModel{
     }
 
     async findById(userId){
-        const idUser = await User.findById(userId);
+        const idUser = await User.findOne({_id: userId});
         return idUser;
     }
 
