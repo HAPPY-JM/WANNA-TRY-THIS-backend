@@ -14,8 +14,11 @@ authRouter.get(
    }),
    // kakaoStrategy에서 성공한다면 콜백 실행
    (req, res) => {
-      console.log("req.user", req.user);
-      res.redirect('/success');
+      try{
+         setUserToken(req.user, res);
+      }catch(err){
+         next(err);
+      }
    },
 );
 
@@ -48,9 +51,12 @@ authRouter.get(
       session: false
    }),
 
-   (req, res) => {
-      console.log("req.user", req.user);
-      res.redirect('/success');
+   async (req, res, next) => {
+      try{
+         setUserToken(req.user, res);
+      }catch(err){
+         next(err);
+      }
    },
 );
 
