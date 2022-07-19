@@ -3,14 +3,15 @@ import passport from "passport";
 
 const authRouter = Router();
 
-authRouter.get('/kakao', passport.authenticate('kakao'));
+authRouter.get('/kakao', passport.authenticate('kakao'),);
 
 //? 위에서 카카오 서버 로그인이 되면, 카카오 redirect url 설정에 따라 이쪽 라우터로 오게 된다.
 authRouter.get(
    '/kakao/callback',
    passport.authenticate('kakao', {
       failureRedirect: '/', // kakaoStrategy에서 실패한다면 실행
-      // successRedirect: '/' ,
+      // successRedirect: '/' 
+      session: false,
    }),
    // kakaoStrategy에서 성공한다면 콜백 실행
    (req, res) => {
