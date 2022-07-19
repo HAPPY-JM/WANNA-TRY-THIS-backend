@@ -1,7 +1,7 @@
 import cors from "cors";
 import express from "express";
 import passport from 'passport';
-import { useKakaoPassport,useGooglePassport } from './passport/index.js';
+import { useKakaoPassport,useGooglePassport, useNaverPassport } from './passport/index.js';
 import { errorHandler } from './middlewares/index.js';
 import { foodRouter, userRouter, authRouter } from './routers/index.js';
 
@@ -9,6 +9,7 @@ import session from 'express-session';
 
 useKakaoPassport();
 useGooglePassport(); 
+useNaverPassport();
 
 const app = express();
 

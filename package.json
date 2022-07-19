@@ -15,7 +15,8 @@
     "mongoose": "^6.4.4",
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
-    "passport-kakao": "^1.0.1"
+    "passport-kakao": "^1.0.1",
+    "passport-naver-v2": "^2.0.8"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.6",

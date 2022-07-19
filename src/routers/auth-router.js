@@ -5,12 +5,10 @@ const authRouter = Router();
 
 authRouter.get('/kakao', passport.authenticate('kakao'),);
 
-//? 위에서 카카오 서버 로그인이 되면, 카카오 redirect url 설정에 따라 이쪽 라우터로 오게 된다.
 authRouter.get(
    '/kakao/callback',
    passport.authenticate('kakao', {
       failureRedirect: '/', // kakaoStrategy에서 실패한다면 실행
-      // successRedirect: '/' 
       session: false,
    }),
    // kakaoStrategy에서 성공한다면 콜백 실행
@@ -19,8 +17,6 @@ authRouter.get(
       res.redirect('/success');
    },
 );
-
-
 
 //구글 로그인
 
@@ -36,6 +32,22 @@ authRouter.get(
    }
 );
 
+// naver 로그인
+authRouter.get('/naver', passport.authenticate('naver', { authType: 'reprompt' }));
+
+authRouter.get(
+   '/naver/callback',
+
+   passport.authenticate('naver', {
+      failureRedirect: '/',
+      session: false
+   }),
+
+   (req, res) => {
+      console.log("req.user", req.user);
+      res.redirect('/success');
+   },
+);
 
 
 
