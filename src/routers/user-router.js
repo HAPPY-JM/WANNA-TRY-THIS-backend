@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { userService } from '../services/index.js';
+import { loginRequired } from '../middlewares/login-required.js';
 
 const userRouter = Router();
 
@@ -21,7 +22,7 @@ userRouter.get('/', async(req, res, next) => {
     }
 });
 
-userRouter.patch('/nickname', async(req, res, next) => {
+userRouter.patch('/nickname', loginRequired, async(req, res, next) => {
     const {userId, newNickname} = req.body;
 
     try{
