@@ -4,6 +4,7 @@ import passport from 'passport';
 import { usePassport } from './passport/index.js';
 import { errorHandler } from './middlewares/index.js';
 import { foodRouter, userRouter, authRouter } from './routers/index.js';
+
 import session from 'express-session';
 
 usePassport();

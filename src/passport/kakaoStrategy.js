@@ -34,11 +34,14 @@ async function findOrCreateUser(email, nickname) {
    config,
 
    async (accessToken, refreshToken, profile, done) => {
-     console.log('kakao profile', profile);
+    //  console.log('kakao profile', profile);
+    //  console.log('accessToken', accessToken);
+    //  console.log('refreshToken', refreshToken);
 
      const nickname = profile._json.properties.nickname;
      const email = profile._json.kakao_account.email;
 
+     // TODO: done함수 인자값 수정 필요한지 생각하기
      try {
        const user = await findOrCreateUser(nickname, email);
        done(null, user);

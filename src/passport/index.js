@@ -13,7 +13,7 @@ export function usePassport() {
     done(null, obj);
   });
 
-  passport.use(kakao);  
+  passport.use(kakao);
 }
 
 export * from './googleStrategy.js';
