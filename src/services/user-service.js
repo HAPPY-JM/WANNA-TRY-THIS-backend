@@ -10,7 +10,26 @@ class UserService {
     async addUser(userInfo){
         const newUser =  await this.userModel.create(userInfo);
         return newUser;
+    }
 
+    async getUser(userId){
+        const userGet = await this.userModel.findById(userId);
+        return userGet;
+    }
+
+    async editUserNickname(userId, newNickname){
+        const editUserNick = await this.userModel.updateNick(userId, newNickname);
+        return editUserNick;
+    }
+
+    async addUserFood(userId, newFoodId){
+        const editUserFood = await this.userModel.updateUserFood(userId, newFoodId);
+        return editUserFood;
+    }
+
+    async deleteUser(userId){
+        const deleteUser = await this.userModel.deleteUser(userId);
+        return deleteUser;
     }
 
     async deleteUser(userId){

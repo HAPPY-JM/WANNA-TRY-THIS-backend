@@ -11,7 +11,7 @@ export class FoodModel{
     }
 
     async findAll(){
-        //모든 음식데이터 가져오기(name, img, comment, nation만)
+        //모든 음식데이터 가져오기(id, name, img, comment, nation만)
         const allFoods = await Food.find({}, {projection: {mood:0, age:0, money:0, ingredient:0}});
         return allFoods;
     }
