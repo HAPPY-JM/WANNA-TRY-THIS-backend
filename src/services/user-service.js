@@ -12,7 +12,13 @@ class UserService {
         return newUser;
 
     }
-}    
+
+    async deleteUser(userId){
+        const deleteUser = await this.userModel.deleteUser(userId);
+        return deleteUser;
+    }
+
+}
 
 const userService = new UserService(userModel);
 

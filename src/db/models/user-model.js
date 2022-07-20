@@ -11,11 +11,15 @@ export class UserModel{
         return createdNewUser;
     }
 
-    async findOne(email) {
-        const user = await User.findOne(email);
+    async findOne(userInfo) {
+        const user = await User.findOne(userInfo);
         return user;
     }
     
+    async deleteUser(userInfo) {
+        const user = await User.deleteOne(userInfo);
+        return user;
+    }
 
 }
 
