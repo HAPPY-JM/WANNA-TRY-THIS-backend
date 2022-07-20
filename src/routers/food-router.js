@@ -23,10 +23,10 @@ foodRouter.get("/result", async(req, res) => {
     const {mood, age, money, ingredient} = req.body;
     const answersToFilter = {
         $or: [ // or? and?
-            { mood: { $in: mood } }, // in을 쓰는게 맞는지 시험해볼것!!
-            { age: { $in: age } },
+            { mood: mood },
+            { age: age },
             { money: { $in: money } },
-            { ingredient: { $in: ingredient } }
+            { ingredient: { $in: ingredient } } // in을 쓰는게 맞는지 시험해볼것!!
         ]
     }
 
