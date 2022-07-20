@@ -4,12 +4,12 @@ import { loginRequired } from '../middlewares/login-required.js';
 
 const userRouter = Router();
 
-userRouter.post("/", async(req, res) => {
-    const userInfo = req.body;
-    const newUser = await userService.addUser(userInfo);
+// userRouter.post("/", async(req, res) => {
+//     const userInfo = req.body;
+//     const newUser = await userService.addUser(userInfo);
 
-    res.status(201).json(newUser);
-});
+//     res.status(201).json(newUser);
+// });
 
 userRouter.get('/', async(req, res, next) => {
     const userId = req.currentUserId;
