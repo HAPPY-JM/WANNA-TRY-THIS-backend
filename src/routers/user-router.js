@@ -46,22 +46,29 @@ userRouter.patch('/addFood', loginRequired, async(req, res, next) => {
 });
 
 // TODO #1: router 동작확인
-// TODO #2: express-validator로 입력값 검증
-userRouter.get("/logout", async(req, res) => {
-// userRouter.get("/logout", loginrequired, async(req, res) => {
+userRouter.get("/logout", loginRequired, async(req, res) => {
+
     try {
         req.logout();
         req.session.save(() => {
+            console.log(req.user);
             res.status(200).redirect('/');
         })
+
+        // req.session.destroy();
+        // res.status(200)/redirect('/');
     } catch (error) {
         next(error);
     }
+
 })
 
-userRouter.delete("/:userId", async(req, res) => {
-// userRouter.delete("/", loginrequired, async(req, res) => {
+userRouter.delete("/:userId", loginRequired, async(req, res) => {
     try {
+        if (!req.params) {
+            throw new Error('userId를 파라미터로 넘겨주세요')
+        }
+        
         const deletedUser = await userService.deleteUser(req.params);
         res.status(200).json(deletedUser);
     } catch (error){
