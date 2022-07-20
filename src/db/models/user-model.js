@@ -12,12 +12,12 @@ export class UserModel{
     }
 
     async findOne(userInfo) {
-        const user = await User.findOne(userInfo);
+        const user = await User.findOne(userInfo).populate("foodData.foodId");
         return user;
     }
 
     async findById(userId){
-        const idUser = await User.findOne({_id: userId});
+        const idUser = await User.findOne({_id: userId}).populate("foodData.foodId");
         return idUser;
     }
 
