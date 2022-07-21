@@ -18,22 +18,22 @@ foodRouter.get("/", async (req, res) => {
     res.status(200).json(getFoods);
 });
 
-//필터링음식get
-foodRouter.get("/result", async(req, res) => {
-    const {mood, age, money, ingredient} = req.body;
-    const answersToFilter = {
-        $or: [ // or? and?
-            { mood: mood },
-            { age: age },
-            { money: { $in: money } },
-            { ingredient: { $in: ingredient } } // in을 쓰는게 맞는지 시험해볼것!!
-        ]
-    }
+// //필터링음식get
+// foodRouter.get("/result", async(req, res) => {
+//     const {mood, age, money, ingredient} = req.body;
+//     const answersToFilter = {
+//         $or: [ // or? and?
+//             { mood: mood },
+//             { age: age },
+//             { money: { $in: money } },
+//             { ingredient: { $in: ingredient } } // in을 쓰는게 맞는지 시험해볼것!!
+//         ]
+//     }
 
-    const filteredFoods = await foodService.foodFilter(answersToFilter);
+//     const filteredFoods = await foodService.foodFilter(answersToFilter);
 
-    res.status(200).json(filteredFoods);
-})
+//     res.status(200).json(filteredFoods);
+// });
 
 
 
