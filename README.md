@@ -29,7 +29,7 @@
   - 백엔드
     - Express, Node
     - 몽고db
-    - 포스트맨
+    
 
 - 와이어프레임: 피그마 (https://www.figma.com/file/eaxRhh4SX5FSUEId05z0fz/5%ED%8C%80_%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84?node-id=50%3A1962)
 
