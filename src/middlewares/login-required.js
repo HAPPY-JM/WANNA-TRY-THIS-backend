@@ -6,8 +6,6 @@ dotenv.config();
 function loginRequired(req, res, next) {
     
     const userToken = req.headers['authorization']?.split(' ')[1];
-    // console.log('userToken', userToken);
-    // console.log('========================');
 
     if(!userToken || userToken === 'null'){
         res.status(403).json({
@@ -20,14 +18,7 @@ function loginRequired(req, res, next) {
 
     try{
         const secretKey = process.env.JWT_SECRET;
-        
         const jwtDecoded = jwt.verify(userToken, secretKey);
-
-        // console.log("secretKey", secretKey);
-        // console.log('========================');
-
-        // console.log("jwtDecoded", jwtDecoded);
-        // console.log('========================');
 
         // const userId = jwtDecoded.userId;
         // req.currentUserId = userId;

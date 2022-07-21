@@ -17,6 +17,7 @@ authRouter.get(
       try{
          setUserToken(req.user, res);
       }catch(err){
+         console.log(err);
          next(err);
       }
    },
