@@ -12,7 +12,7 @@ const userRouter = Router();
 // });
 
 userRouter.get('/', async(req, res, next) => {
-    const userId = req.currentUserId;
+    const {userId} = req.body;
     
     try{
         const user = await userService.getUser(userId);
@@ -22,7 +22,7 @@ userRouter.get('/', async(req, res, next) => {
     }
 });
 
-userRouter.patch('/nickname', loginRequired, async(req, res, next) => {
+userRouter.patch('/nickname',/* loginRequired,*/ async(req, res, next) => {
     const {userId, newNickname} = req.body;
 
     try{
@@ -34,7 +34,7 @@ userRouter.patch('/nickname', loginRequired, async(req, res, next) => {
     
 });
 
-userRouter.patch('/addFood', loginRequired, async(req, res, next) => {
+userRouter.patch('/addFood',/* loginRequired,*/ async(req, res, next) => {
     const {userId, addFoodId} = req.body;
 
     try{

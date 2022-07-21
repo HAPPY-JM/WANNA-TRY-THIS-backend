@@ -26,7 +26,7 @@ export class UserModel{
             {_id: userId},
             {$set: {nickname: newNick}},
             {returnOriginal: false}
-        );
+        ).populate("foodData.foodId");
         return updatedUser;
     }
     
@@ -35,7 +35,7 @@ export class UserModel{
             {_id: userId},
             {$push: {foodData: {foodId: newFoodId}}}, // user스키마 foodData배열에 새로 추천받은 음식 아이디 추가
             {returnOriginal: false}
-        );
+        ).populate("foodData.foodId");
         return updateUser;
     }
 
