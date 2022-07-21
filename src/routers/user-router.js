@@ -4,15 +4,15 @@ import { loginRequired } from '../middlewares/login-required.js';
 
 const userRouter = Router();
 
-userRouter.post("/", async(req, res) => {
-    const userInfo = req.body;
-    const newUser = await userService.addUser(userInfo);
+// userRouter.post("/", async(req, res) => {
+//     const userInfo = req.body;
+//     const newUser = await userService.addUser(userInfo);
 
-    res.status(201).json(newUser);
-});
+//     res.status(201).json(newUser);
+// });
 
-userRouter.get('/', async(req, res, next) => {
-    const userId = req.currentUserId;
+userRouter.get('/:userId', async(req, res, next) => {
+    const {userId} = req.params;
     
     try{
         const user = await userService.getUser(userId);
@@ -22,7 +22,7 @@ userRouter.get('/', async(req, res, next) => {
     }
 });
 
-userRouter.patch('/nickname', loginRequired, async(req, res, next) => {
+userRouter.patch('/nickname',/* loginRequired,*/ async(req, res, next) => {
     const {userId, newNickname} = req.body;
 
     try{
@@ -34,7 +34,7 @@ userRouter.patch('/nickname', loginRequired, async(req, res, next) => {
     
 });
 
-userRouter.patch('/addFood', loginRequired, async(req, res, next) => {
+userRouter.patch('/addFood',/* loginRequired,*/ async(req, res, next) => {
     const {userId, addFoodId} = req.body;
     
     try{

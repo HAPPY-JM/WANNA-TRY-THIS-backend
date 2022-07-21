@@ -7,10 +7,10 @@ class UserService {
         this.userModel = userModel;
     }
 
-    async addUser(userInfo){
-        const newUser =  await this.userModel.create(userInfo);
-        return newUser;
-    }
+    // async addUser(userInfo){
+    //     const newUser =  await this.userModel.create(userInfo);
+    //     return newUser;
+    // }
 
     async getUser(userId){
         const userGet = await this.userModel.findById(userId);
