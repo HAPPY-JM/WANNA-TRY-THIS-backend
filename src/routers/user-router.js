@@ -11,8 +11,8 @@ const userRouter = Router();
 //     res.status(201).json(newUser);
 // });
 
-userRouter.get('/', async(req, res, next) => {
-    const {userId} = req.body;
+userRouter.get('/:userId', async(req, res, next) => {
+    const {userId} = req.params;
     
     try{
         const user = await userService.getUser(userId);
