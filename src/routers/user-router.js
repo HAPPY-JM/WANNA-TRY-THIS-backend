@@ -1,20 +1,18 @@
 import { Router } from 'express';
 import { userService } from '../services/index.js';
 import { loginRequired } from '../middlewares/login-required.js';
+import { changeNicknameValidator, addFoodValidator } from '../middlewares/user-validator.js';
 
 const userRouter = Router();
 
-// userRouter.post("/", async(req, res) => {
-//     const userInfo = req.body;
-//     const newUser = await userService.addUser(userInfo);
-
-//     res.status(201).json(newUser);
-// });
-
 userRouter.get('/:userId', async (req, res, next) => {
-	const { userId } = req.params;
-
 	try {
+		const { userId } = req.params;
+
+		if (!userId) {
+			throw new Error('userId 값이 없습니다.');
+		}
+
 		const user = await userService.getUser(userId);
 		res.status(200).json(user);
 	} catch (err) {
@@ -22,9 +20,9 @@ userRouter.get('/:userId', async (req, res, next) => {
 	}
 });
 
-userRouter.patch(
-	'/nickname',
-	/* loginRequired,*/ async (req, res, next) => {
+// TODO: 닉네임을 새로 설정하면 토큰을 다시 생성해서 프론트에 보내줘야 함
+userRouter.patch('/nickname', loginRequired, changeNicknameValidator,
+	async (req, res, next) => {
 		const { userId, newNickname } = req.body;
 
 		try {
@@ -39,9 +37,8 @@ userRouter.patch(
 	},
 );
 
-userRouter.patch(
-	'/addFood',
-	/* loginRequired,*/ async (req, res, next) => {
+userRouter.patch('/addFood', loginRequired, addFoodValidator,
+	async (req, res, next) => {
 		const { userId, addFoodId } = req.body;
 
 		try {
@@ -53,31 +50,11 @@ userRouter.patch(
 	},
 );
 
-// TODO #1: router 동작확인
-userRouter.get('/logout', loginRequired, async (req, res) => {
-	try {
-		// 세션을 사용하지 않기 때문에 불필요한 코드 (by 상수 코치님)
-		//#region comment out
-		// req.logout();
-		// req.session.save(() => {
-		//     console.log(req.user);
-		//     res.status(200).redirect('/');
-		// })
-
-		// req.session.destroy();
-		// res.status(200)/redirect('/');
-		//#endregion
-
-		res.status(200).redirect('/');
-	} catch (error) {
-		next(error);
-	}
-});
-
 userRouter.delete('/:userId', loginRequired, async (req, res) => {
 	try {
 		if (!req.params) {
-			throw new Error('userId를 파라미터로 넘겨주세요');
+			throw new Error('userId');
+
 		}
 
 		const deletedUser = await userService.deleteUser(req.params);
