@@ -18,7 +18,7 @@ foodRouter.get('/', async (req, res) => {
 	res.status(200).json(getFoods);
 });
 
-// //필터링음식get
+// //필터링음식get ********* 추후 수정 ***********
 // foodRouter.get('/result', async (req, res) => {
 // 	const { mood, age, money, ingredient } = req.query;
 // 	const answersToFilter = {
