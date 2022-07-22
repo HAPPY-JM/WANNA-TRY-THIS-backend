@@ -81,7 +81,7 @@ userRouter.delete('/:userId', loginRequired, async (req, res) => {
 		}
 
 		const deletedUser = await userService.deleteUser(req.params);
-		res.status(200).json(deletedUser);
+		res.status(204).json(deletedUser);
 	} catch (error) {
 		next(error);
 	}
