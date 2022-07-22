@@ -9,14 +9,12 @@ export const google = new Strategy(
 		callbackURL: '/api/auth/google/callback',
 	},
 	async (accessToken, refreshToken, profile, done) => {
-		console.log(profile);
-
 		const nickname = profile.displayName;
 		const email = profile.emails[0].value;
 		const provider = profile.provider;
 
 		try {
-			const user = await userModel.findOne({ email });
+			const user = await userModel.findOne({ email, provider });
 
 			if (user) {
 				done(null, user);

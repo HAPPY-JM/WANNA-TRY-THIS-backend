@@ -53,4 +53,38 @@ userRouter.patch(
 	},
 );
 
+// TODO #1: router 동작확인
+userRouter.get('/logout', loginRequired, async (req, res) => {
+	try {
+		// 세션을 사용하지 않기 때문에 불필요한 코드 (by 상수 코치님)
+		//#region comment out
+		// req.logout();
+		// req.session.save(() => {
+		//     console.log(req.user);
+		//     res.status(200).redirect('/');
+		// })
+
+		// req.session.destroy();
+		// res.status(200)/redirect('/');
+		//#endregion
+
+		res.status(200).redirect('/');
+	} catch (error) {
+		next(error);
+	}
+});
+
+userRouter.delete('/:userId', loginRequired, async (req, res) => {
+	try {
+		if (!req.params) {
+			throw new Error('userId를 파라미터로 넘겨주세요');
+		}
+
+		const deletedUser = await userService.deleteUser(req.params);
+		res.status(200).json(deletedUser);
+	} catch (error) {
+		next(error);
+	}
+});
+
 export { userRouter };
