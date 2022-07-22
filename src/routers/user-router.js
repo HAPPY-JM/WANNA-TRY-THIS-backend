@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express';
 import { userService } from '../services/index.js';
 import { loginRequired } from '../middlewares/login-required.js';
 
@@ -11,74 +11,80 @@ const userRouter = Router();
 //     res.status(201).json(newUser);
 // });
 
-userRouter.get('/:userId', async(req, res, next) => {
-    const {userId} = req.params;
-    
-    try{
-        const user = await userService.getUser(userId);
-        res.status(200).json(user);
-    }catch(err){
-        next(err);
-    }
+userRouter.get('/:userId', async (req, res, next) => {
+	const { userId } = req.params;
+
+	try {
+		const user = await userService.getUser(userId);
+		res.status(200).json(user);
+	} catch (err) {
+		next(err);
+	}
 });
 
-userRouter.patch('/nickname',/* loginRequired,*/ async(req, res, next) => {
-    const {userId, newNickname} = req.body;
+userRouter.patch(
+	'/nickname',
+	/* loginRequired,*/ async (req, res, next) => {
+		const { userId, newNickname } = req.body;
 
-    try{
-        const updateNickname = await userService.editUserNickname(userId, newNickname);
-        res.status(200).json(updateNickname);
-    }catch(err){
-        next(err);
-    }
-    
-});
+		try {
+			const updateNickname = await userService.editUserNickname(
+				userId,
+				newNickname,
+			);
+			res.status(200).json(updateNickname);
+		} catch (err) {
+			next(err);
+		}
+	},
+);
 
-userRouter.patch('/addFood',/* loginRequired,*/ async(req, res, next) => {
-    const {userId, addFoodId} = req.body;
-    
-    try{
-        const updateUserFood = await userService.addUserFood(userId, addFoodId);
-        res.status(200).json(updateUserFood);
-    }catch(err){
-        next(err);
-    }
-});
+userRouter.patch(
+	'/addFood',
+	/* loginRequired,*/ async (req, res, next) => {
+		const { userId, addFoodId } = req.body;
+
+		try {
+			const updateUserFood = await userService.addUserFood(userId, addFoodId);
+			res.status(200).json(updateUserFood);
+		} catch (err) {
+			next(err);
+		}
+	},
+);
 
 // TODO #1: router 동작확인
-userRouter.get("/logout", loginRequired, async(req, res) => {
+userRouter.get('/logout', loginRequired, async (req, res) => {
+	try {
+		// 세션을 사용하지 않기 때문에 불필요한 코드 (by 상수 코치님)
+		//#region comment out
+		// req.logout();
+		// req.session.save(() => {
+		//     console.log(req.user);
+		//     res.status(200).redirect('/');
+		// })
 
-    try {
-        // 세션을 사용하지 않기 때문에 불필요한 코드 (by 상수 코치님)
-//#region comment out
-        // req.logout();
-        // req.session.save(() => {
-        //     console.log(req.user);
-        //     res.status(200).redirect('/');
-        // })
+		// req.session.destroy();
+		// res.status(200)/redirect('/');
+		//#endregion
 
-        // req.session.destroy();
-        // res.status(200)/redirect('/');
-//#endregion
-        
-        res.status(200).redirect('/');
-    } catch (error) {
-        next(error);
-    }
+		res.status(200).redirect('/');
+	} catch (error) {
+		next(error);
+	}
+});
 
-})
+userRouter.delete('/:userId', loginRequired, async (req, res) => {
+	try {
+		if (!req.params) {
+			throw new Error('userId를 파라미터로 넘겨주세요');
+		}
 
-userRouter.delete("/:userId", loginRequired, async(req, res) => {
-    try {
-        if (!req.params) {
-            throw new Error('userId를 파라미터로 넘겨주세요')
-        }
-
-        const deletedUser = await userService.deleteUser(req.params);
-        res.status(200).json(deletedUser);
-    } catch (error) {
-        next(error);
-    }
-})
+		const deletedUser = await userService.deleteUser(req.params);
+		res.status(200).json(deletedUser);
+	} catch (error) {
+		next(error);
+	}
+});
 
 export { userRouter };
