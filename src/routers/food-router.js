@@ -4,12 +4,12 @@ import { foodService } from '../services/index.js';
 const foodRouter = Router();
 
 //음식추가
-foodRouter.post('/', async (req, res) => {
-	const foodInfo = req.body;
-	const addNewFood = await foodService.addFood(foodInfo);
+// foodRouter.post('/', async (req, res) => {
+// 	const foodInfo = req.body;
+// 	const addNewFood = await foodService.addFood(foodInfo);
 
-	res.status(201).json(addNewFood);
-});
+// 	res.status(201).json(addNewFood);
+// });
 
 //모든음식get
 foodRouter.get('/', async (req, res) => {
