@@ -41,12 +41,8 @@ export class UserModel {
 	}
 
 	async deleteUser(userId) {
-		const deletedUser = await User.deleteOne(userId);
-		return deletedUser;
-	}
-
-	async temp(user) {
-		console.log('a');
+		const deleteUser = await User.deleteOne(userId);
+		return deleteUser;
 	}
 }
 
