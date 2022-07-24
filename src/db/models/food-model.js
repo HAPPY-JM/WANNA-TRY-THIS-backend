@@ -5,7 +5,7 @@ import { FoodSchema } from '../schemas/food-schema.js';
 const Food = model('food', FoodSchema);
 
 export class FoodModel {
-	async create(foodInfo) {
+	async createNewFood(foodInfo) {
 		const createNewFood = await Food.create(foodInfo);
 		return createNewFood;
 	}
