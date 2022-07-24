@@ -9,10 +9,12 @@ authRouter.get('/kakao', passport.authenticate('kakao'));
 
 authRouter.get(
 	'/kakao/callback',
+
 	passport.authenticate('kakao', {
 		failureRedirect: '/',
 		session: false,
 	}),
+
 	(req, res) => {
 		try {
 			setUserToken(req.user, res);
@@ -40,7 +42,6 @@ authRouter.get(
 	},
 );
 
-// 네이버 로그인
 authRouter.get(
 	'/naver',
 	passport.authenticate('naver', { authType: 'reprompt' }),
