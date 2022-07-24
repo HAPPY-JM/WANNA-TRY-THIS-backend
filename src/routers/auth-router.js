@@ -42,6 +42,7 @@ authRouter.get(
 	},
 );
 
+// 네이버 로그인
 authRouter.get(
 	'/naver',
 	passport.authenticate('naver', { authType: 'reprompt' }),
