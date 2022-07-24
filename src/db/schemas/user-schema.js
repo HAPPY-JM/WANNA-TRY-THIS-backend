@@ -5,13 +5,10 @@ const UserSchema = new Schema(
 	{
 		nickname: {
 			type: String,
-			// default: (받아온 정보에 있는 이름)
 		},
 
 		email: {
 			type: String,
-			// unique: true,
-			// ref: (받아온 정보의 이메일)
 		},
 
 		foodData: [
