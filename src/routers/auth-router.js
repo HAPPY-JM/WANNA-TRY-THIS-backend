@@ -8,16 +8,16 @@ authRouter.get('/kakao', passport.authenticate('kakao'));
 
 authRouter.get(
 	'/kakao/callback',
+
 	passport.authenticate('kakao', {
-		failureRedirect: '/', // kakaoStrategy에서 실패한다면 실행
+		failureRedirect: '/',
 		session: false,
 	}),
-	// kakaoStrategy에서 성공한다면 콜백 실행
+
 	(req, res) => {
 		try {
 			setUserToken(req.user, res);
 		} catch (err) {
-			console.log(err);
 			next(err);
 		}
 	},
@@ -44,7 +44,6 @@ authRouter.get(
 	},
 );
 
-// naver 로그인
 authRouter.get(
 	'/naver',
 	passport.authenticate('naver', { authType: 'reprompt' }),
