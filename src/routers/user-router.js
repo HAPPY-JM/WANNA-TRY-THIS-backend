@@ -62,12 +62,20 @@ userRouter.patch(
 
 userRouter.delete('/:userId', loginRequired, async (req, res) => {
 	try {
-		if (!req.params) {
-			throw new Error('userId');
+		const { userId } = req.params;
+
+		const user = await userService.getUser(userId);
+
+		if (user) {
+			console.log('success', user);
+			return;
+		} else {
+			console.log('fail', user);
+			return;
 		}
 
-		const deletedUser = await userService.deleteUser(req.params);
 		res.status(204).json(deletedUser);
+
 	} catch (error) {
 		next(error);
 	}
