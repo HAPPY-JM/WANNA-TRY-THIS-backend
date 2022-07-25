@@ -41,7 +41,7 @@ export class UserModel {
 	}
 
 	async deleteUser(userId) {
-		const deleteUser = await User.deleteOne(userId);
+		const deleteUser = await User.findOneAndDelete({ _id: userId });
 		return deleteUser;
 	}
 }
