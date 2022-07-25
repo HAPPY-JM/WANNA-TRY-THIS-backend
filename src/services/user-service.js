@@ -31,11 +31,6 @@ class UserService {
 		const deleteUser = await this.userModel.deleteUser(userId);
 		return deleteUser;
 	}
-
-	async deleteUser(userId) {
-		const deleteUser = await this.userModel.deleteUser(userId);
-		return deleteUser;
-	}
 }
 
 const userService = new UserService(userModel);
