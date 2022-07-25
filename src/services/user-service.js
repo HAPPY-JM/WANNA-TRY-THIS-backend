@@ -15,6 +15,7 @@ class UserService {
 	async getUser(userId) {
 		const userGet = await this.userModel.findById(userId);
 		return userGet;
+
 	}
 
 	async editUserNickname(userId, newNickname) {
@@ -27,18 +28,7 @@ class UserService {
 		return editUserFood;
 	}
 
-	// async deleteUser(userId) {
-	// 	const deleteUser = await this.userModel.deleteUser(userId);
-	// 	return deleteUser;
-	// }
-
 	async deleteUser(userId) {
-		const user = await this.userModel.findById(userId);
-
-		if (!user) {
-			throw Error('올바르지 않은 userId 입니다.');
-		}
-
 		const deleteUser = await this.userModel.deleteUser(userId);
 		return deleteUser;
 	}

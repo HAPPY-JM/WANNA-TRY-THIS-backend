@@ -15,7 +15,6 @@ userRouter.get('/:userId', async (req, res, next) => {
 		if (!userId) {
 			throw new Error('userId 값이 없습니다.');
 		}
-
 		const user = await userService.getUser(userId);
 		res.status(200).json(user);
 	} catch (err) {
@@ -59,24 +58,14 @@ userRouter.patch(
 	},
 );
 
-userRouter.delete('/:userId', loginRequired, async (req, res) => {
+userRouter.delete('/:userId', loginRequired, async (req, res, next) => {
 	try {
 		const { userId } = req.params;
-
-		const user = await userService.getUser(userId);
-
-		if (user) {
-			console.log('success', user);
-			return;
-		} else {
-			console.log('fail', user);
-			return;
-		}
-
+		const deletedUser = await userService.deleteUser(userId);
+		
 		res.status(204).json(deletedUser);
-
-	} catch (error) {
-		next(error);
+	} catch (err) {
+		next(err);
 	}
 });
 
