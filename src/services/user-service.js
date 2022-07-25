@@ -27,11 +27,6 @@ class UserService {
 		return editUserFood;
 	}
 
-	// async deleteUser(userId) {
-	// 	const deleteUser = await this.userModel.deleteUser(userId);
-	// 	return deleteUser;
-	// }
-
 	async deleteUser(userId) {
 		const user = await this.userModel.findById(userId);
 
