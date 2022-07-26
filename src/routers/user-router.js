@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import { userService } from '../services/index.js';
-import { loginRequired } from '../middlewares/login-required.js';
 import {
+	loginRequired,
 	changeNicknameValidator,
 	addFoodValidator,
-} from '../middlewares/user-validator.js';
+} from '../middlewares/index.js';
+import { setUserToken } from '../utils/index.js';
 
 const userRouter = Router();
 
@@ -22,7 +23,6 @@ userRouter.get('/:userId', async (req, res, next) => {
 	}
 });
 
-// TODO: 닉네임을 새로 설정하면 토큰을 다시 생성해서 프론트에 보내줘야 함
 userRouter.patch(
 	'/nickname',
 	loginRequired,
@@ -35,7 +35,8 @@ userRouter.patch(
 				userId,
 				newNickname,
 			);
-			res.status(200).json(updateNickname);
+
+			setUserToken(updateNickname, res);
 		} catch (err) {
 			next(err);
 		}
@@ -62,7 +63,7 @@ userRouter.delete('/:userId', loginRequired, async (req, res, next) => {
 	try {
 		const { userId } = req.params;
 		const deletedUser = await userService.deleteUser(userId);
-		
+
 		res.status(204).json(deletedUser);
 	} catch (err) {
 		next(err);
