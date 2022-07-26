@@ -1,4 +1,4 @@
-import { app } from "./app";
+import { app } from "../app";
 import request from "supertest"
 
 const TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuaWNrbmFtZSI6IuuPme2ZlCIsImVtYWlsIjoianNqb2hhbjkyQG5hdmVyLmNvbSIsInByb3ZpZGVyIjoiS0FLQU8iLCJpYXQiOjE2NTgzMTczNzJ9.nHMixZ-l--qn3xbh-468JexrzDIUQV09A_l5nC4HdF8';
