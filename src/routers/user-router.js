@@ -5,7 +5,6 @@ import {
 	changeNicknameValidator,
 	addFoodValidator,
 } from '../middlewares/user-validator.js';
-import { setUserToken } from '../utils/setUserToken.js';
 
 const userRouter = Router();
 
@@ -23,6 +22,7 @@ userRouter.get('/:userId', async (req, res, next) => {
 	}
 });
 
+// TODO: 닉네임을 새로 설정하면 토큰을 다시 생성해서 프론트에 보내줘야 함
 userRouter.patch(
 	'/nickname',
 	loginRequired,
@@ -35,8 +35,7 @@ userRouter.patch(
 				userId,
 				newNickname,
 			);
-
-			setUserToken(updateNickname, res);
+			res.status(200).json(updateNickname);
 		} catch (err) {
 			next(err);
 		}
@@ -63,7 +62,7 @@ userRouter.delete('/:userId', loginRequired, async (req, res, next) => {
 	try {
 		const { userId } = req.params;
 		const deletedUser = await userService.deleteUser(userId);
-
+		
 		res.status(204).json(deletedUser);
 	} catch (err) {
 		next(err);
