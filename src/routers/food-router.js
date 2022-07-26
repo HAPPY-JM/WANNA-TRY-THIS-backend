@@ -32,7 +32,6 @@ foodRouter.get('/', async (req, res, next) => {
 
 //필터링음식get
 foodRouter.get('/result', async (req, res, next) => {
-	console.log(req.query);
 	const { mood, age, money, ingredient } = req.query;
 
 	let answersToFilter;
@@ -50,7 +49,6 @@ foodRouter.get('/result', async (req, res, next) => {
 			],
 		};
 	}
-	console.log(answersToFilter);
 
 	try {
 		const filteredFoods = await foodService.foodFilter(answersToFilter);
