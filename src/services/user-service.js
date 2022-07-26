@@ -1,5 +1,5 @@
 import { userModel } from '../db/index.js';
-
+import HashMap from 'hashmap';
 //유저라우터에서 사용
 class UserService {
 	// 본 파일의 맨 아래에서, new UserService(userModel) 하면, 이 함수의 인자로 전달됨
@@ -12,9 +12,74 @@ class UserService {
 	//     return newUser;
 	// }
 
+	async parseUserInfo(user) {
+		const foodCountMap = new HashMap();
+		const continentCountMap = new HashMap();
+
+		const foodData = user.foodData;
+		const foodDataLength = foodData.length;
+
+		/* 
+			유저 정보에 들어있는 foodData 배열을 순회하면서 아래 해시맵 객체에 저장
+				1. foodCountMap : 음식 별 추천받은 횟수
+				2. continentCountMap: 대륙 별 추천받은 횟수
+		*/
+		for (let i = 0; i < foodDataLength; ++i) {
+			if (foodCountMap.has(foodData[i].foodId.name)) {
+				foodCountMap.set(
+					foodData[i].foodId.name,
+					foodCountMap.get(foodData[i].foodId.name) + 1,
+				);
+			} else {
+				foodCountMap.set(foodData[i].foodId.name, 1);
+			}
+
+			if (continentCountMap.has(foodData[i].foodId.nation)) {
+				continentCountMap.set(
+					foodData[i].foodId.nation,
+					continentCountMap.get(foodData[i].foodId.nation) + 1,
+				);
+			} else {
+				continentCountMap.set(foodData[i].foodId.nation, 1);
+			}
+		}
+
+		// foodCountMap 최대 value 값 찾기
+		let maxValue = 0;
+		for (let value of foodCountMap.values()) {
+			if (value > maxValue) {
+				maxValue = value;
+			}
+		}
+
+		// foodCountMap 최대 value 값에 대응되는 key값을 배열에 저장 (최대 3개)
+		const mostRecommandedFood = [];
+		for (let { key, value } of foodCountMap) {
+			if (mostRecommandedFood.length > 2) {
+				break;
+			}
+
+			if (value == maxValue) {
+				mostRecommandedFood.push(key);
+			}
+		}
+
+		// response 객체에 데이터 넣기
+		const userInfo = {};
+		userInfo['mostRecommandedFood'] = mostRecommandedFood;
+
+		for (let { key, value } of continentCountMap) {
+			userInfo[key] = value;
+		}
+
+		return userInfo;
+	}
+
 	async getUser(userId) {
 		const userGet = await this.userModel.findById(userId);
-		return userGet;
+		const parsedUserInfo = this.parseUserInfo(userGet);
+
+		return parsedUserInfo;
 	}
 
 	async editUserNickname(userId, newNickname) {
@@ -28,12 +93,6 @@ class UserService {
 	}
 
 	async deleteUser(userId) {
-		const user = await this.userModel.findById(userId);
-
-		if (!user) {
-			throw Error('올바르지 않은 userId 입니다.');
-		}
-
 		const deleteUser = await this.userModel.deleteUser(userId);
 		return deleteUser;
 	}
