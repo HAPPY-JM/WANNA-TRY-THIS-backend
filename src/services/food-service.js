@@ -7,7 +7,7 @@ class FoodService {
 	}
 
 	async addFood(foodInfo) {
-		const newFood = await this.foodModel.create(foodInfo);
+		const newFood = await this.foodModel.createNewFood(foodInfo);
 		return newFood;
 	}
 
