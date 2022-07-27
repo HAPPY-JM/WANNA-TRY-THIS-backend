@@ -44,3 +44,24 @@ it('[성공] GET /api/food 성공 시 Status Code는 200을 반환한다.', asyn
 // 	const response = await request(app).get('/api/food');
 // 	expect(response.statusCode).toBe(400);
 // });
+
+// 필터링음식 get
+it('[성공] GET /api/food/result?mood&age&money&ingredient 성공 시 Status Code는 200을 반환한다.', async () => {
+	const response = await request(app).get('/api/food/result').query({
+		mood: 'good',
+		age: 'middle',
+		money: 'any',
+		ingredient: 'meat',
+	});
+	expect(response.statusCode).toBe(200);
+});
+
+it('[실패] GET /api/food/result?mood&age&money&ingredient 실패 시 Status Code는 400을 반환한다.', async () => {
+	const response = await request(app).get('/api/food/result').query({
+		mood: 'no',
+		age: 'middle',
+		money: 'cheap',
+		ingredient: 'meat',
+	});
+	expect(response.statusCode).toBe(400);
+});
