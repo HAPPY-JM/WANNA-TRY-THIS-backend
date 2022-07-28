@@ -3,7 +3,7 @@ import { foodService } from '../services/index.js';
 
 const foodRouter = Router();
 
-//음식추가;
+//음식추가
 foodRouter.post('/', async (req, res, next) => {
 	const foodInfo = req.body;
 
@@ -25,6 +25,33 @@ foodRouter.get('/', async (req, res, next) => {
 			throw new Error('저장되어 있는 음식 데이터가 없습니다.');
 		}
 		res.status(200).json(getFoods);
+	} catch (err) {
+		next(err);
+	}
+});
+
+// 무한스크롤
+foodRouter.get('/perPage', async (req, res, next) => {
+	try {
+		const currentPageNum = Number(req.query.page);
+		const perPageNum = 15;
+
+		const allProducts = await foodService.findAll();
+		const allProductsLength = allProducts.length;
+
+		//early-return
+		if (currentPageNum > Math.ceil(allProductsLength / perPageNum)) {
+			throw new Error('올바르지 않은 page 번호입니다.');
+		}
+
+		const productsPerPage = await foodService.pagination(allProducts, currentPageNum, perPageNum);
+		const totalPageNum = Math.ceil(allProductsLength / perPageNum);
+
+		res.status(200).send({
+			productsPerPage,
+			totalPageNum
+		});
+
 	} catch (err) {
 		next(err);
 	}
