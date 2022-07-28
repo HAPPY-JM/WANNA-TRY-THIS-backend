@@ -26,6 +26,11 @@ export class FoodModel {
 		}); //필터링 잘 되는 것 확인하고 주석 해제
 		return filteredFoods;
 	}
+
+	async findByNation(nation) {
+		const foods = await Food.find({ nation: nation });
+		return foods;
+	}
 }
 
 const foodModel = new FoodModel();
