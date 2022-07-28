@@ -32,26 +32,29 @@ foodRouter.get('/', async (req, res, next) => {
 
 // 무한스크롤
 foodRouter.get('/perPage', async (req, res, next) => {
+	const currentPageNum = Number(req.query.page);
+	const perPageNum = 15;
+
+	const allProducts = await foodService.findAll();
+	const allProductsLength = allProducts.length;
+	const maxPageNum = Math.ceil(allProductsLength / perPageNum);
+
 	try {
-		const currentPageNum = Number(req.query.page);
-		const perPageNum = 15;
-
-		const allProducts = await foodService.findAll();
-		const allProductsLength = allProducts.length;
-		const maxPageNum = Math.ceil(allProductsLength / perPageNum);
-
 		//early-return
 		if (currentPageNum < 1 || currentPageNum > maxPageNum) {
 			throw new Error('올바르지 않은 page 번호입니다.');
 		}
 
-		const productsPerPage = await foodService.pagination(allProducts, currentPageNum, perPageNum);
+		const productsPerPage = await foodService.pagination(
+			allProducts,
+			currentPageNum,
+			perPageNum,
+		);
 
 		res.status(200).send({
 			productsPerPage,
-			maxPageNum
+			maxPageNum,
 		});
-
 	} catch (err) {
 		next(err);
 	}
@@ -90,13 +93,20 @@ foodRouter.get('/result', async (req, res, next) => {
 	}
 });
 
+//국가별 음식 get
 foodRouter.get('/:nation', async (req, res, next) => {
-
 	const { nation } = req.params;
 
 	try {
-		if (!(nation == "kor" || nation == "chi" || nation == "jap" ||
-			nation == "west" || nation == "etc")) {
+		if (
+			!(
+				nation == 'kor' ||
+				nation == 'chi' ||
+				nation == 'jap' ||
+				nation == 'west' ||
+				nation == 'etc'
+			)
+		) {
 			throw new Error(`${nation}은(는) 올바르지 않은 nation 이름입니다.`);
 		}
 		const foods = await foodService.findByNation(nation);
@@ -104,6 +114,6 @@ foodRouter.get('/:nation', async (req, res, next) => {
 	} catch (err) {
 		next(err);
 	}
-})
+});
 
 export { foodRouter };
