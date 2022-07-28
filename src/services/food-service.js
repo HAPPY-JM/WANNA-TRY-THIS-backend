@@ -16,10 +16,25 @@ class FoodService {
 		return allFoods;
 	}
 
+	async findByNation(nation) {
+		const foods = await this.foodModel.findByNation(nation);
+		return foods;
+	}
+
 	async foodFilter(answers) {
 		const findFoods = await this.foodModel.foodFilter(answers);
 		return findFoods;
 	}
+
+	async pagination(allProduct, currentPageNum, perPageNum) {
+		const currentProducts = await allProduct.slice(
+			perPageNum * (currentPageNum - 1),
+			perPageNum * (currentPageNum - 1) + perPageNum
+		);
+
+		return currentProducts;
+	}
+
 }
 
 const foodService = new FoodService(foodModel);
