@@ -42,10 +42,6 @@ const FoodSchema = new Schema(
 			required: true,
 		}, // 국가 kor, chi, jap, western, etc
 	},
-	{
-		collection: 'foods',
-		timestamps: true,
-	},
 );
 
 export { FoodSchema };
