@@ -15,9 +15,9 @@ export const google = new Strategy(
 
 		try {
 			const user = await userModel.findOne({ email, provider });
-
 			if (user) {
 				done(null, user);
+				return;
 			}
 
 			const createdUser = await userModel.create({
