@@ -41,7 +41,7 @@ foodRouter.get('/perPage', async (req, res, next) => {
 		const maxPageNum = Math.ceil(allProductsLength / perPageNum);
 
 		//early-return
-		if (currentPageNum > maxPageNum) {
+		if (currentPageNum < 1 || currentPageNum > maxPageNum) {
 			throw new Error('올바르지 않은 page 번호입니다.');
 		}
 
