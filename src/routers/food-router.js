@@ -90,4 +90,20 @@ foodRouter.get('/result', async (req, res, next) => {
 	}
 });
 
+foodRouter.get('/:nation', async (req, res, next) => {
+
+	const { nation } = req.params;
+
+	try {
+		if (!(nation == "kor" || nation == "chi" || nation == "jap" ||
+			nation == "west" || nation == "etc")) {
+			throw new Error(`${nation}은(는) 올바르지 않은 nation 이름입니다.`);
+		}
+		const foods = await foodService.findByNation(nation);
+		res.status(200).json(foods);
+	} catch (err) {
+		next(err);
+	}
+})
+
 export { foodRouter };
