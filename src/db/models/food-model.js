@@ -21,9 +21,9 @@ export class FoodModel {
 
 	async foodFilter(answers) {
 		// 답변들로 음식찾기
-		const filteredFoods = await Food.find(
-			{ answers } /*, {projection: {mood:0, age:0, money:0, ingredient:0}}*/,
-		); //필터링 잘 되는 것 확인하고 주석 해제
+		const filteredFoods = await Food.find(answers, {
+			projection: { mood: 0, age: 0, money: 0, ingredient: 0 },
+		}); //필터링 잘 되는 것 확인하고 주석 해제
 		return filteredFoods;
 	}
 }
