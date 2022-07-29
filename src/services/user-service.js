@@ -7,11 +7,6 @@ class UserService {
 		this.userModel = userModel;
 	}
 
-	// async addUser(userInfo){
-	//     const newUser =  await this.userModel.create(userInfo);
-	//     return newUser;
-	// }
-
 	async parseUserInfo(user) {
 		const foodCountMap = new HashMap();
 		const continentCountMap = new HashMap();
@@ -70,7 +65,7 @@ class UserService {
 			userInfo[key] = value;
 		}
 
-	  return userInfo;
+		return userInfo;
 
 	}
 
@@ -81,7 +76,14 @@ class UserService {
 		return parsedUserInfo;
 	}
 
-	async editUserNickname(userId, newNickname) {	
+	async getUserByReq(reqInfo) {
+		const userInfo = { email: reqInfo.email, provider: reqInfo.provider };
+		const user = await this.userModel.findOne(userInfo);
+
+		return user;
+	}
+
+	async editUserNickname(userId, newNickname) {
 		const editUserNick = await this.userModel.updateNick(userId, newNickname);
 		return editUserNick;
 	}
