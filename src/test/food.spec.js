@@ -40,10 +40,10 @@ it('[성공] GET /api/food 성공 시 Status Code는 200을 반환한다.', asyn
 	expect(response.statusCode).toBe(200);
 });
 
-// it('[실패] GET /api/food 실패 시 Status Code는 400을 반환한다.', async () => {
-// 	const response = await request(app).get('/api/food');
-// 	expect(response.statusCode).toBe(400);
-// });
+it('[실패] GET /api/food 실패 시 Status Code는 400을 반환한다.', async () => {
+	const response = await request(app).get('/api/food');
+	expect(response.statusCode).toBe(400);
+});
 
 // 필터링음식 get
 it('[성공] GET /api/food/result?mood&age&money&ingredient 성공 시 Status Code는 200을 반환한다.', async () => {
@@ -63,5 +63,27 @@ it('[실패] GET /api/food/result?mood&age&money&ingredient 실패 시 Status Co
 		money: 'cheap',
 		ingredient: 'meat',
 	});
+	expect(response.statusCode).toBe(400);
+});
+
+// 무한 스크롤
+it('[성공] GET /api/food/perPage?page 성공 시 Status Code는 200을 반환한다.', async () => {
+	const response = await request(app).get('/api/food/perPage?page=1');
+	expect(response.statusCode).toBe(200);
+});
+
+it('[실패] GET /api/food/perPage?page 실패 시 Status Code는 400을 반환한다.', async () => {
+	const response = await request(app).get('/api/food/perPage?page=100');
+	expect(response.statusCode).toBe(400);
+});
+
+// 국가별 음식 get
+it('[성공] GET /api/food/:nation 성공 시 Status Code는 200을 반환한다.', async () => {
+	const response = await request(app).get('/api/food/etc');
+	expect(response.statusCode).toBe(200);
+});
+
+it('[실패] GET /api/food/:nation 실패 시 Status Code는 400을 반환한다.', async () => {
+	const response = await request(app).get('/api/food/dfdfd');
 	expect(response.statusCode).toBe(400);
 });
