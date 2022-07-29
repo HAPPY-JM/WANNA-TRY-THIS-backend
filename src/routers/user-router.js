@@ -9,7 +9,7 @@ import { setUserToken } from '../utils/index.js';
 
 const userRouter = Router();
 
-userRouter.get('/userData', loginRequired, async (req, res, next) => {
+userRouter.get('/', loginRequired, async (req, res, next) => {
 	try {
 		const { userId } = req.currentUserId;
 
@@ -61,10 +61,6 @@ userRouter.patch(
 		}
 	},
 );
-
-userRouter.get('/logout', async (req, res) => {
-	res.clearCookie('jwtToken');
-});
 
 userRouter.delete('/', loginRequired, async (req, res, next) => {
 	try {
