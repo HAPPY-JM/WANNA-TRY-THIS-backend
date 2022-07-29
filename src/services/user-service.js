@@ -22,7 +22,8 @@ class UserService {
 		for (let i = 0; i < foodDataLength; ++i) {
 			if (foodCountMap.has(foodData[i].foodId.name)) {
 				foodCountMap.set(
-					foodData[i].foodId.name, foodCountMap.get(foodData[i].foodId.name) + 1
+					foodData[i].foodId.name,
+					foodCountMap.get(foodData[i].foodId.name) + 1,
 				);
 			} else {
 				foodCountMap.set(foodData[i].foodId.name, 1);
@@ -30,7 +31,8 @@ class UserService {
 
 			if (continentCountMap.has(foodData[i].foodId.nation)) {
 				continentCountMap.set(
-					foodData[i].foodId.nation, continentCountMap.get(foodData[i].foodId.nation) + 1
+					foodData[i].foodId.nation,
+					continentCountMap.get(foodData[i].foodId.nation) + 1,
 				);
 			} else {
 				continentCountMap.set(foodData[i].foodId.nation, 1);
@@ -59,21 +61,21 @@ class UserService {
 
 		// response 객체에 데이터 넣기
 		const userInfo = {};
-		userInfo["mostRecommandedFood"] = mostRecommandedFood;
+		userInfo['mostRecommandedFood'] = mostRecommandedFood;
 
 		for (let { key, value } of continentCountMap) {
 			userInfo[key] = value;
 		}
 
 		return userInfo;
-
 	}
 
 	async getUser(userId) {
 		const userGet = await this.userModel.findById(userId);
 		const parsedUserInfo = this.parseUserInfo(userGet);
+		const userNick = userGet.nickname;
 
-		return parsedUserInfo;
+		return { userNick, parsedUserInfo };
 	}
 
 	async getUserByReq(reqInfo) {
