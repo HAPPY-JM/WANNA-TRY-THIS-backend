@@ -6,5 +6,4 @@ export const setUserToken = (user, res) => {
 	res.cookie('jwtToken', token, {
 		httpOnly: true,
 	});
-	res.redirect(`http://localhost:3000/`);
 };

@@ -37,6 +37,7 @@ userRouter.patch(
 			);
 
 			setUserToken(updateNickname, res);
+			res.status(200).json(updateNickname);
 		} catch (err) {
 			next(err);
 		}
