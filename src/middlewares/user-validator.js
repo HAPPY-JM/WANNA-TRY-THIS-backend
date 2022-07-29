@@ -17,8 +17,6 @@ export const changeNicknameValidator = [
 ];
 
 export const addFoodValidator = [
-	body('userId', 'userId를 입력해주세요.').trim().notEmpty(),
-
 	body('addFoodId', 'addFoodId를 입력해주세요.').trim().notEmpty(),
 
 	validationFunc,
