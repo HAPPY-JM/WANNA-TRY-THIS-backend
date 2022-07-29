@@ -18,7 +18,7 @@ authRouter.get(
 	(req, res) => {
 		try {
 			setUserToken(req.user, res);
-			res.redirect(`http://localhost:3000/`);
+			res.redirect(`http://localhost:3000/EmptyPage/`);
 		} catch (err) {
 			next(err);
 		}
@@ -37,7 +37,7 @@ authRouter.get(
 	async (req, res, next) => {
 		try {
 			setUserToken(req.user, res);
-			res.redirect(`http://localhost:3000/`);
+			res.redirect(`http://localhost:3000/EmptyPage/`);
 		} catch (err) {
 			next(err);
 		}
@@ -61,7 +61,7 @@ authRouter.get(
 	async (req, res, next) => {
 		try {
 			setUserToken(req.user, res);
-			res.redirect(`http://localhost:3000/`);
+			res.redirect(`http://localhost:3000/EmptyPage/`);
 		} catch (err) {
 			next(err);
 		}
