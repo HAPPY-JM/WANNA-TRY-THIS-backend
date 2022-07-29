@@ -35,11 +35,11 @@ foodRouter.get('/perPage', async (req, res, next) => {
 	const currentPageNum = Number(req.query.page);
 	const perPageNum = 15;
 
-	const allProducts = await foodService.findAll();
-	const allProductsLength = allProducts.length;
-	const maxPageNum = Math.ceil(allProductsLength / perPageNum);
-
 	try {
+		const allProducts = await foodService.findAll();
+		const allProductsLength = allProducts.length;
+		const maxPageNum = Math.ceil(allProductsLength / perPageNum);
+
 		//early-return
 		if (currentPageNum < 1 || currentPageNum > maxPageNum) {
 			throw new Error('올바르지 않은 page 번호입니다.');
