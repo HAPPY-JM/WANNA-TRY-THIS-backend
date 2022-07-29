@@ -9,9 +9,9 @@ import { setUserToken } from '../utils/index.js';
 
 const userRouter = Router();
 
-userRouter.get('/:userId', async (req, res, next) => {
+userRouter.get('/userData', loginRequired, async (req, res, next) => {
 	try {
-		const { userId } = req.params;
+		const { userId } = req.currentUserId;
 
 		if (!userId) {
 			throw new Error('userId 값이 없습니다.');
@@ -28,7 +28,8 @@ userRouter.patch(
 	loginRequired,
 	changeNicknameValidator,
 	async (req, res, next) => {
-		const { userId, newNickname } = req.body;
+		const { userId } = req.currentUserId;
+		const { newNickname } = req.body;
 
 		try {
 			const updateNickname = await userService.editUserNickname(
@@ -49,7 +50,8 @@ userRouter.patch(
 	loginRequired,
 	addFoodValidator,
 	async (req, res, next) => {
-		const { userId, addFoodId } = req.body;
+		const { userId } = req.currentUserId;
+		const { addFoodId } = req.body;
 
 		try {
 			const updateUserFood = await userService.addUserFood(userId, addFoodId);
@@ -60,9 +62,13 @@ userRouter.patch(
 	},
 );
 
-userRouter.delete('/:userId', loginRequired, async (req, res, next) => {
+userRouter.get('/logout', async (req, res) => {
+	res.clearCookie('jwtToken');
+});
+
+userRouter.delete('/', loginRequired, async (req, res, next) => {
 	try {
-		const { userId } = req.params;
+		const { userId } = req.currentUserId;
 		const deletedUser = await userService.deleteUser(userId);
 
 		res.status(204).json(deletedUser);
