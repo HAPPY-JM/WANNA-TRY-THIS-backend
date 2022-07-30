@@ -79,13 +79,14 @@
 
 ### 📑 DevOps
 
- - **애자일 개발 프로세스** <br>
-
+- **애자일 개발 프로세스** <br>
 
  <br>
 
 ## 5. Architecture
+
 ### Client
+
 ```
 src
  ┣ components
@@ -121,7 +122,9 @@ src
  ┣ reportWebVitals.js
  ┗ setupTests.js
 ```
+
 ### Back
+
 ```
 src
  ┣ db
