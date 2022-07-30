@@ -9,15 +9,16 @@ import { setUserToken } from '../utils/index.js';
 
 const userRouter = Router();
 
-userRouter.get('/:userId', async (req, res, next) => {
+userRouter.get('/', loginRequired, async (req, res, next) => {
 	try {
-		const { userId } = req.params;
+		const user = await userService.getUserByReq(req);
+		const userId = user._id;
 
 		if (!userId) {
 			throw new Error('userId 값이 없습니다.');
 		}
-		const user = await userService.getUser(userId);
-		res.status(200).json(user);
+		const userInfo = await userService.getUser(userId);
+		res.status(200).json(userInfo);
 	} catch (err) {
 		next(err);
 	}
@@ -28,15 +29,24 @@ userRouter.patch(
 	loginRequired,
 	changeNicknameValidator,
 	async (req, res, next) => {
-		const { userId, newNickname } = req.body;
+
+		const { newNickname } = req.body;
 
 		try {
+			const user = await userService.getUserByReq(req);
+			const userId = user._id;
+
+			if (!userId) {
+				throw new Error('userId 값이 없습니다.');
+			}
+
 			const updateNickname = await userService.editUserNickname(
 				userId,
 				newNickname,
 			);
 
 			setUserToken(updateNickname, res);
+			res.status(200).json(updateNickname);
 		} catch (err) {
 			next(err);
 		}
@@ -48,9 +58,17 @@ userRouter.patch(
 	loginRequired,
 	addFoodValidator,
 	async (req, res, next) => {
-		const { userId, addFoodId } = req.body;
+
+		const { addFoodId } = req.body;
 
 		try {
+			const user = await userService.getUserByReq(req);
+			const userId = user._id;
+
+			if (!userId) {
+				throw new Error('userId 값이 없습니다.');
+			}
+
 			const updateUserFood = await userService.addUserFood(userId, addFoodId);
 			res.status(200).json(updateUserFood);
 		} catch (err) {
@@ -59,9 +77,14 @@ userRouter.patch(
 	},
 );
 
-userRouter.delete('/:userId', loginRequired, async (req, res, next) => {
+userRouter.delete('/', loginRequired, async (req, res, next) => {
 	try {
-		const { userId } = req.params;
+		const user = await userService.getUserByReq(req);
+		const userId = user._id;
+
+		if (!userId) {
+			throw new Error('userId 값이 없습니다.');
+		}
 		const deletedUser = await userService.deleteUser(userId);
 
 		res.status(204).json(deletedUser);
