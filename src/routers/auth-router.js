@@ -19,7 +19,7 @@ authRouter.get(
 		try {
 			setUserToken(req.user, res);
 			res.redirect(
-				`http://kdt-sw2-busan-team05.elicecoding.com:5003/EmptyPage/`,
+				`http://kdt-sw2-busan-team05.elicecoding.com:5003/Loading/`,
 			);
 		} catch (err) {
 			next(err);
@@ -40,7 +40,7 @@ authRouter.get(
 		try {
 			setUserToken(req.user, res);
 			res.redirect(
-				`http://kdt-sw2-busan-team05.elicecoding.com:5003/EmptyPage/`,
+				`http://kdt-sw2-busan-team05.elicecoding.com:5003/Loading/`,
 			);
 		} catch (err) {
 			next(err);
@@ -66,7 +66,7 @@ authRouter.get(
 		try {
 			setUserToken(req.user, res);
 			res.redirect(
-				`http://kdt-sw2-busan-team05.elicecoding.com:5003/EmptyPage/`,
+				`http://kdt-sw2-busan-team05.elicecoding.com:5003/Loading/`,
 			);
 		} catch (err) {
 			next(err);
