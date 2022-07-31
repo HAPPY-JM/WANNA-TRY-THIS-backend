@@ -66,7 +66,7 @@ authRouter.get(
 		try {
 			setUserToken(req.user, res);
 			res.redirect(
-				`http://kdt-sw2-busan-team05.elicecoding.com:5003/Loading/`,
+				`http://kdt-sw2-busan-team05.elicecoding.com:5003/LoadingNaver/`,
 			);
 		} catch (err) {
 			next(err);
