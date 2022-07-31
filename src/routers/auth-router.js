@@ -18,9 +18,7 @@ authRouter.get(
 	(req, res) => {
 		try {
 			setUserToken(req.user, res);
-			res.redirect(
-				`http://kdt-sw2-busan-team05.elicecoding.com:5003/Loading/`,
-			);
+			res.redirect(`http://kdt-sw2-busan-team05.elicecoding.com/Loading/`);
 		} catch (err) {
 			next(err);
 		}
@@ -39,9 +37,7 @@ authRouter.get(
 	async (req, res, next) => {
 		try {
 			setUserToken(req.user, res);
-			res.redirect(
-				`http://kdt-sw2-busan-team05.elicecoding.com:5003/Loading/`,
-			);
+			res.redirect(`http://kdt-sw2-busan-team05.elicecoding.com/Loading/`);
 		} catch (err) {
 			next(err);
 		}
@@ -65,9 +61,7 @@ authRouter.get(
 	async (req, res, next) => {
 		try {
 			setUserToken(req.user, res);
-			res.redirect(
-				`http://kdt-sw2-busan-team05.elicecoding.com:5003/LoadingNaver/`,
-			);
+			res.redirect(`http://kdt-sw2-busan-team05.elicecoding.com/LoadingNaver/`);
 		} catch (err) {
 			next(err);
 		}
