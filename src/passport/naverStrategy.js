@@ -32,8 +32,8 @@ export const naver = new NaverStrategy(
 	config,
 
 	async (accessToken, refreshToken, profile, done) => {
-		const nickname = profile.email;
-		const email = profile.name;
+		const nickname = profile.name;
+		const email = profile.email;
 
 		try {
 			const user = await findOrCreateUser(nickname, email);
