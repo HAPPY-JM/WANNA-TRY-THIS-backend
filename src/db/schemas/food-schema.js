@@ -31,12 +31,14 @@ const FoodSchema = new Schema(
 			type: String,
 			required: true,
 		}, // 예산 cheap, middle, expensive
-		ingredient: [
-			{
-				type: String,
-				required: true,
-			},
-		], // 재료 [meat, seafood, etc]
+		ingredient:{
+			type: String,
+			required: true,
+		}, // 재료 meat, sea, etc
+		type:{
+			type: String,
+			required:true,
+		}, // 유형 noodle, rice, etc
 		nation: {
 			type: String,
 			required: true,
