@@ -23,7 +23,6 @@ function loginRequired(req, res, next) {
 		req.provider = jwtDecoded.provider;
 
 		next();
-
 	} catch (err) {
 		res.status(403).json({
 			result: 'forbidden-approach',

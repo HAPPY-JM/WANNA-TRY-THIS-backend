@@ -5,14 +5,14 @@ const UserSchema = new Schema(
 	{
 		nickname: {
 			type: String,
-			required: true
+			required: true,
 		},
 
 		email: {
 			type: String,
-			required: true
+			required: true,
 		},
-		
+
 		foodData: [
 			{
 				foodId: {
