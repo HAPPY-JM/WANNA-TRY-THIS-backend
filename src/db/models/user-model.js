@@ -11,7 +11,7 @@ export class UserModel {
 	}
 
 	async findOne(userInfo) {
-		const user = await User.findOne(userInfo).populate('foodData.foodId');		
+		const user = await User.findOne(userInfo).populate('foodData.foodId');
 		return user;
 	}
 
@@ -21,7 +21,6 @@ export class UserModel {
 		);
 
 		return idUser;
-
 	}
 
 	async updateNick(userId, newNick) {

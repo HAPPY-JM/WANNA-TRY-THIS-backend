@@ -62,12 +62,37 @@ foodRouter.get('/perPage', async (req, res, next) => {
 
 //필터링음식get
 foodRouter.get('/result', async (req, res, next) => {
-	const { mood, age, money, ingredient } = req.query;
+	const { mood, age, money, ingredient, nation, type } = req.query;
 
 	let answersToFilter;
 	if (money === 'any') {
 		answersToFilter = {
-			$and: [{ mood: mood }, { age: age }, { ingredient: ingredient }],
+			$and: [
+				{ mood: mood },
+				{ age: age },
+				{ ingredient: ingredient },
+				{ nation: nation },
+				{ type: type },
+			],
+		};
+	} else if (nation === 'any') {
+		answersToFilter = {
+			$and: [
+				{ mood: mood },
+				{ age: age },
+				{ money: money },
+				{ ingredient: ingredient },
+				{ type: type },
+			],
+		};
+	} else if (money === 'any' && nation === 'any') {
+		answersToFilter = {
+			$and: [
+				{ mood: mood },
+				{ age: age },
+				{ ingredient: ingredient },
+				{ type: type },
+			],
 		};
 	} else {
 		answersToFilter = {
@@ -76,6 +101,8 @@ foodRouter.get('/result', async (req, res, next) => {
 				{ age: age },
 				{ money: money },
 				{ ingredient: ingredient },
+				{ nation: nation },
+				{ type: type },
 			],
 		};
 	}
