@@ -18,7 +18,7 @@ authRouter.get(
 	(req, res) => {
 		try {
 			setUserToken(req.user, res);
-			res.redirect(`http://kdt-sw2-busan-team05.elicecoding.com/Loading/`);
+			res.redirect(`https://wanna-try-this.herokuapp.com/Loading/`);
 		} catch (err) {
 			next(err);
 		}
