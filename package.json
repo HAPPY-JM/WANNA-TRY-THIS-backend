@@ -1,7 +1,7 @@
 {
 	"type": "module",
 	"scripts": {
-		"start": "nodemon index.js babel-node",
+		"start": "node index.js",
 		"test": "jest"
 	},
 	"dependencies": {
@@ -16,7 +16,6 @@
 		"http": "^0.0.1-security",
 		"jsonwebtoken": "^8.5.1",
 		"mongoose": "^6.4.4",
-		"mongoose-auto-increment": "^5.0.1",
 		"passport": "^0.5.3",
 		"passport-google-oauth20": "^2.0.0",
 		"passport-kakao": "^1.0.1",
