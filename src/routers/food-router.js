@@ -16,20 +16,6 @@ foodRouter.post('/', async (req, res, next) => {
 	}
 });
 
-//모든음식get
-foodRouter.get('/', async (req, res, next) => {
-	try {
-		const getFoods = await foodService.findAll();
-
-		if (getFoods.length == 0) {
-			throw new Error('저장되어 있는 음식 데이터가 없습니다.');
-		}
-		res.status(200).json(getFoods);
-	} catch (err) {
-		next(err);
-	}
-});
-
 // 무한스크롤
 foodRouter.get('/perPage', async (req, res, next) => {
 	const currentPageNum = Number(req.query.page);
@@ -62,12 +48,37 @@ foodRouter.get('/perPage', async (req, res, next) => {
 
 //필터링음식get
 foodRouter.get('/result', async (req, res, next) => {
-	const { mood, age, money, ingredient } = req.query;
+	const { mood, age, money, ingredient, nation, type } = req.query;
 
 	let answersToFilter;
 	if (money === 'any') {
 		answersToFilter = {
-			$and: [{ mood: mood }, { age: age }, { ingredient: ingredient }],
+			$and: [
+				{ mood: mood },
+				{ age: age },
+				{ ingredient: ingredient },
+				{ nation: nation },
+				{ type: type },
+			],
+		};
+	} else if (nation === 'any') {
+		answersToFilter = {
+			$and: [
+				{ mood: mood },
+				{ age: age },
+				{ money: money },
+				{ ingredient: ingredient },
+				{ type: type },
+			],
+		};
+	} else if (money === 'any' && nation === 'any') {
+		answersToFilter = {
+			$and: [
+				{ mood: mood },
+				{ age: age },
+				{ ingredient: ingredient },
+				{ type: type },
+			],
 		};
 	} else {
 		answersToFilter = {
@@ -76,6 +87,8 @@ foodRouter.get('/result', async (req, res, next) => {
 				{ age: age },
 				{ money: money },
 				{ ingredient: ingredient },
+				{ nation: nation },
+				{ type: type },
 			],
 		};
 	}

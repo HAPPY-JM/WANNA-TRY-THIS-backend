@@ -29,7 +29,6 @@ userRouter.patch(
 	loginRequired,
 	changeNicknameValidator,
 	async (req, res, next) => {
-
 		const { newNickname } = req.body;
 
 		try {
@@ -58,7 +57,6 @@ userRouter.patch(
 	loginRequired,
 	addFoodValidator,
 	async (req, res, next) => {
-
 		const { addFoodId } = req.body;
 
 		try {
