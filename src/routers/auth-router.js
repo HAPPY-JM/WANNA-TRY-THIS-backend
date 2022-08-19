@@ -18,7 +18,7 @@ authRouter.get(
 	(req, res) => {
 		try {
 			setUserToken(req.user, res);
-			res.redirect(`http://localhost:3000/Loading/`);
+			res.redirect(`https://wanna-try-this.herokuapp.com/Loading/`);
 		} catch (err) {
 			next(err);
 		}

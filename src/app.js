@@ -33,6 +33,7 @@ app.use(
 		secret: 'SECRET',
 		resave: false,
 		saveUninitialized: false,
+		proxy: true,
 	}),
 );
 
