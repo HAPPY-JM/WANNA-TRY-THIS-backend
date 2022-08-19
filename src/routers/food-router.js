@@ -16,20 +16,6 @@ foodRouter.post('/', async (req, res, next) => {
 	}
 });
 
-//모든음식get
-foodRouter.get('/', async (req, res, next) => {
-	try {
-		const getFoods = await foodService.findAll();
-
-		if (getFoods.length == 0) {
-			throw new Error('저장되어 있는 음식 데이터가 없습니다.');
-		}
-		res.status(200).json(getFoods);
-	} catch (err) {
-		next(err);
-	}
-});
-
 // 무한스크롤
 foodRouter.get('/perPage', async (req, res, next) => {
 	const currentPageNum = Number(req.query.page);

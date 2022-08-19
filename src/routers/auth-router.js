@@ -37,7 +37,7 @@ authRouter.get(
 	async (req, res, next) => {
 		try {
 			setUserToken(req.user, res);
-			res.redirect(`http://localhost:3000/Loading/`);
+			res.redirect(`https://wanna-try-this.herokuapp.com/Loading/`);
 		} catch (err) {
 			next(err);
 		}
@@ -61,7 +61,7 @@ authRouter.get(
 	async (req, res, next) => {
 		try {
 			setUserToken(req.user, res);
-			res.redirect(`http://localhost:3000/LoadingNaver/`);
+			res.redirect(`https://wanna-try-this.herokuapp.com/Loading/`);
 		} catch (err) {
 			next(err);
 		}
