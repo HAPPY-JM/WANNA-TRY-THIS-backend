@@ -11,11 +11,6 @@ class FoodService {
 		return newFood;
 	}
 
-	async findAll() {
-		const allFoods = await this.foodModel.findAll();
-		return allFoods;
-	}
-
 	async findByNation(nation) {
 		const foods = await this.foodModel.findByNation(nation);
 		return foods;

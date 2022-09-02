@@ -10,21 +10,6 @@ export class FoodModel {
 		return createNewFood;
 	}
 
-	async findAll() {
-		//모든 음식데이터 가져오기(id, name, img, comment, nation만)
-		const allFoods = await Food.find(
-			{},
-			{
-				mood: 0,
-				age: 0,
-				money: 0,
-				ingredient: 0,
-			},
-		);
-
-		return allFoods;
-	}
-
 	async foodFilter(answers) {
 		// 답변들로 음식찾기
 		const filteredFoods = await Food.find(answers, {
@@ -32,6 +17,7 @@ export class FoodModel {
 			age: 0,
 			money: 0,
 			ingredient: 0,
+			type: 0,
 		});
 
 		return filteredFoods;
@@ -45,6 +31,7 @@ export class FoodModel {
 				age: 0,
 				money: 0,
 				ingredient: 0,
+				type: 0,
 			},
 		);
 
