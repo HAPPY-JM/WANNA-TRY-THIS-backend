@@ -67,12 +67,15 @@ class UserService {
 			userInfo[key] = value;
 		}
 
+		console.log("userInfo", userInfo);
+
 		return userInfo;
 	}
 
 	async getUser(userId) {
 		const userGet = await this.userModel.findById(userId);
-		const parsedUserInfo = this.parseUserInfo(userGet);
+		const parsedUserInfo = await this.parseUserInfo(userGet);
+
 		const userNick = userGet.nickname;
 
 		return { userNick, parsedUserInfo };
